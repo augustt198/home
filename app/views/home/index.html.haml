@@ -1,0 +1,32 @@
+%h1 There will be more stuff here in the future
+%br
+%a.btn.btn-default#popover-shortener Shorten A Link
+%div{style: 'display: none'}
+  #popover-shortener-title
+    %span#shortener-title-status
+      Enter link
+
+  #popover-shortener-content
+    = form_for ShortenedLink.new, remote: true do |f|
+      .input-group
+        = f.text_field :redirect, class: 'form-control'
+        %span.input-group-btn
+          = f.submit 'Go!', class: 'btn btn-primary'
+
+
+:javascript
+  $('#popover-shortener').popover({
+    html: true,
+    content: function() {
+      return $('#popover-shortener-content').html();
+    },
+    title: function() {
+      return $('#popover-shortener-title').html();
+    }
+  });
+  $(document).ready(function() {
+
+    $('#new_shortened_link').on('ajax:complete', function(a,b,c,d) {
+      alert('completed!');
+    });
+  });

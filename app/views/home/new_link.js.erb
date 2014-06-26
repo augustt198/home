@@ -1,0 +1,13 @@
+<%- if @good_url %>
+  $('#shortener-title-status').attr('class', 'text-success');
+  $('#shortener-title-status').html('<b>New Link: </b> <%= @link_preview %> <%= @copy_html %>');
+  var client = new ZeroClipboard(document.getElementById('copy-button'));
+  client.on('ready', function(readyEvent) {
+    client.on('aftercopy', function(event) {
+      
+    });
+  });
+<%- else %>
+  $('#shortener-title-status').attr('class', 'text-danger');
+  $('#shortener-title-status').html('<b>Bad URL!</b>');
+<%- end %>
